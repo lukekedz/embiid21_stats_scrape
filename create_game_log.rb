@@ -1,20 +1,16 @@
 require 'json'
 require 'pg'
+require_relative 'processor'
 
 database = JSON.parse(File.read('./database_local.json'))
 
 begin
-    puts
-    print "Processing..."
-    i = 0
-    while i < 10
-        print "."
-        sleep(0.25)
-        i += 1
-    end
+    Processor.processing()
 
-
-	conn = PG.connect :dbname => database['database'], :user => database['username'], :password => database['password'], :host => database['dataserver']
+	conn = PG.connect :dbname   => database['database'], 
+                      :user     => database['username'], 
+                      :password => database['password'], 
+                      :host     => database['dataserver']
 
     conn.exec "DROP TABLE IF EXISTS game_log"
     conn.exec "DROP SEQUENCE IF EXISTS serial"
@@ -42,10 +38,6 @@ begin
         updated_at  TIMESTAMP NOT NULL,
         created_at  TIMESTAMP NOT NULL
     )"
-
-    print "   Processed."
-    puts
-    puts
 
 rescue PG::Error => e
     puts e.message
