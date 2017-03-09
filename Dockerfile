@@ -1,5 +1,8 @@
 FROM ruby:latest
 
+RUN echo "America/New_York" > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
+
 RUN mkdir -p /opt/embiid21_stats_scrape
 WORKDIR /opt/embiid21_stats_scrape
 

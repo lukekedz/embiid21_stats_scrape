@@ -123,5 +123,5 @@ begin
 		puts
 	end
 
-	sleep 900
+	sleep 300
 end while 1 == 1
