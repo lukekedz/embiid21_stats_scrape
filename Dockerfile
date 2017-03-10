@@ -1,7 +1,4 @@
-# http://blog.alexellis.io/5-things-docker-rpi/
-# https://github.com/resin-io/Hello-Ruby
-
-FROM hypriot/rpi-ruby:latest
+FROM ruby:latest
 
 RUN apt-get update
 
