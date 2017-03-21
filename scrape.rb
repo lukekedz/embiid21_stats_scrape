@@ -48,8 +48,6 @@ begin
             end
         end
 
-
-
         # stats = Hash[ stats.map { |k, v| [k.to_s, v] } ]
         puts
         puts "READY FOR UPLOAD"
@@ -73,3 +71,4 @@ begin
 rescue StandardError => e
   # log_file.close
 end
+
