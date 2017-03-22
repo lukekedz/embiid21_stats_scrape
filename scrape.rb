@@ -97,7 +97,7 @@ begin
 	    end
 
 	   	# TODO: email update
-        sleep(60 * 10)
+        sleep(60 * 30)
     	
     	log.info output.end
     	log.info output.new_line
