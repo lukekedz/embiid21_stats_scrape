@@ -32,7 +32,7 @@ begin
 
 		# TODO: could store this value within cron job
         # last_stat_record                 = HTTParty.get('http://localhost:2121/site/last_stat_record')
-        last_stat_record                 = HTTParty.post('http://embiid21.herokuapp.com/site/last_stat_record')
+        last_stat_record                 = HTTParty.get('http://embiid21.herokuapp.com/site/last_stat_record')
         validations[:stats_not_uploaded] = valid.stats_not_uploaded(log, last_game_in_espn_log, last_stat_record)
 
     	upload_data = []
