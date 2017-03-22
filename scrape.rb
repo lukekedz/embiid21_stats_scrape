@@ -94,12 +94,12 @@ begin
 	        log.info response.inspect
     		log.info output.new_line
     	end
-
-	   	# TODO: email update
-        sleep(60 * 30)
     	
     	log.info output.end
     	log.info output.new_line
+
+    	# TODO: email update
+    	sleep(60 * 30)
     end
 rescue StandardError => error
 	log.error error.inspect
