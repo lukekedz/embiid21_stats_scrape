@@ -11,4 +11,5 @@ class PrettifyLogOutput
 	def end
 		'PROCESSED: ' + Time.now.to_s[0..18]
 	end
+	
 end
