@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    daemons (1.2.4)
+    chronic (0.10.2)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
     json (2.0.3)
@@ -9,15 +9,20 @@ GEM
     multi_xml (0.6.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
+    rake (12.0.0)
+    whenever (0.9.7)
+      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  daemons
+  chronic
   httparty
   json
   nokogiri
+  rake
+  whenever
 
 BUNDLED WITH
    1.13.6

@@ -1,15 +1,22 @@
 class Validation
 
-	def page(log, code)
-		log.info __method__
-		log.info code.inspect
+	def initialize(log, output)
+		@log    = log
+		@output = output
+	end
+
+	def page?(code)
+		@log.info __method__
+		@log.info code.inspect
+		@log.info @output.new_line
 
 		code == 200 ? true : false
 	end
 
-	def columns(log, columns)
-		log.info __method__
-		log.info columns.inspect
+	def columns?(columns)
+		@log.info __method__
+		@log.info columns.inspect
+		@log.info @output.new_line
 
 		valid_columns = ['DATE',    'OPP', 'SCORE',   'MIN', 
 			             'FGM-FGA', 'FG%', '3PM-3PA', '3P%', 
@@ -27,23 +34,30 @@ class Validation
 		true
 	end
 
-	def game_complete(log, last_game_in_espn_log)
-		log.info __method__
-		log.info last_game_in_espn_log.inspect
+	def game_complete?(last_game_in_espn_log)
+		@log.info __method__
+		@log.info last_game_in_espn_log.inspect
+		@log.info @output.new_line
 
 		outcome = last_game_in_espn_log[2].children.text[0]
 
 		outcome == "W" || outcome == "L" ? true : false
 	end
 	
-	def stats_not_uploaded(log, last_game_in_espn_log, last_stat_record)
-		log.info __method__
-		log.info last_game_in_espn_log.inspect
-		log.info last_stat_record.inspect
+	def upload_stats?(last_game_in_espn_log, last_stat_record)
+		@log.info __method__
+		@log.info "upload_stats() LAST GAME IN ESPN LOG"
+		@log.info last_game_in_espn_log.inspect
+		@log.info @output.new_line
+
+		@log.info "upload_stats() LAST STAT RECORD"
+		@log.info last_stat_record.inspect
+		@log.info @output.new_line
 
 		last_game_date   = last_game_in_espn_log[0].children.text
 		last_record_date = last_stat_record.parsed_response["game_date"]
 
+		# if no match, then TRUE/proceed to upload new record
 		last_game_date == last_record_date ? false : true
 	end
 	
