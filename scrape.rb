@@ -38,7 +38,7 @@ begin
     if validations[:columns] == false
     	# TODO:
     	# error handling
-    	# email alrert
+    	# email alert
     	# break process
     end
 
@@ -125,13 +125,17 @@ begin
 
 		        # TODO: error response (non 200 code) from Rails Heroku app
 		        log.info "UPLOAD_STATS RESPONSE: " + response.inspect
+		        log.info "RESPONSE STATUS CODE: " + response.code.inspect
 				log.info output.new_line
 
 		   		# WORKFLOW 4c: upload successful, job is done
-				if response == 200 then validations[:upload_stats] = false end
+				if response.code == 200 then validations[:upload_stats] = false end				
 
-				sleep(60 * 1)
+				log.info "VALIDATIONS after WORKFLOW 4c: " + validations.inspect
+				log.info output.new_line
 	   		end
+
+			sleep(60 * 1)
 		end
 	end
 	
@@ -142,6 +146,7 @@ begin
 	# TODO: email update
 
 rescue StandardError => error
+	log.error "ERROR!"
 	log.error error.inspect
     log.error output.new_line
 

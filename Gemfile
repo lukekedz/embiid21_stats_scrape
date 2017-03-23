@@ -6,4 +6,3 @@ gem 'nokogiri'
 gem 'json'
 gem 'whenever'
 gem 'chronic'
-
