@@ -46,7 +46,11 @@ class Validation
 	
 	def upload_stats?(last_game_in_espn_log, last_stat_record)
 		@log.info __method__
+		@log.info "upload_stats() LAST GAME IN ESPN LOG"
 		@log.info last_game_in_espn_log.inspect
+		@log.info @output.new_line
+
+		@log.info "upload_stats() LAST STAT RECORD"
 		@log.info last_stat_record.inspect
 		@log.info @output.new_line
 
