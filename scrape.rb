@@ -143,7 +143,7 @@ begin
 	log.info output.run_time
 	log.info output.new_line
 
-  system "echo 'Here is your daily stat scrape.' | mail -s 'Raspi: Embiid Stat Scrape' embiidfeed@gmail.com -A /logger/log_#{stamp}.txt"
+  system "echo 'Here is your daily stat scrape.' | mail -s 'Raspi: Embiid Stat Scrape' embiidfeed@gmail.com -A /home/pi/Desktop/embiid21_stats_scrape/logger/log_#{stamp}.txt"
 rescue StandardError => error
 	log.error "ERROR!"
 	log.error error.inspect
@@ -152,7 +152,7 @@ rescue StandardError => error
 	# sleep(60 * 5)
 
   if retries == 3
-    system "echo 'Error when processing stat scrape.' | mail -s 'ERROR! Embiid Stat Scrape' embiidfeed@gmail.com -A /logger/log_#{stamp}.txt"
+    system "echo 'Error when processing stat scrape.' | mail -s 'ERROR! Embiid Stat Scrape' embiidfeed@gmail.com -A /home/pi/Desktop/embiid21_stats_scrape/logger/log_#{stamp}.txt"
   else
     retries += 1
     retry
