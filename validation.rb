@@ -19,11 +19,11 @@ class Validation
 		@log.info @output.new_line
 
 		valid_columns = ['DATE',    'OPP', 'SCORE',   'MIN', 
-			             'FGM-FGA', 'FG%', '3PM-3PA', '3P%', 
-			             'FTM-FTA', 'FT%', 'REB',     'AST', 
-			             'BLK',     'STL', 'PF',      'TO',  
-			             'PTS'
-			          	]
+			               'FGM-FGA', 'FG%', '3PM-3PA', '3P%', 
+			               'FTM-FTA', 'FT%', 'REB',     'AST', 
+			               'BLK',     'STL', 'PF',      'TO',  
+			               'PTS'
+			          	  ]
 
         columns.each_with_index do |value, index|
 			if value.text != valid_columns[index]
@@ -54,11 +54,14 @@ class Validation
 		@log.info last_stat_record.inspect
 		@log.info @output.new_line
 
-		last_game_date   = last_game_in_espn_log[0].children.text
-		last_record_date = last_stat_record.parsed_response["game_date"]
+		# last_game_date   = last_game_in_espn_log[0].children.text
+		# last_record_date = last_stat_record.parsed_response["game_date"]
+		last_game_score   = last_game_in_espn_log[2].children.text
+		last_record_score = last_stat_record.parsed_response["score"]
 
 		# if no match, then TRUE/proceed to upload new record
-		last_game_date == last_record_date ? false : true
+		# last_game_date == last_record_date ? false : true
+		last_game_score == last_record_score ? false : true
 	end
 	
 end

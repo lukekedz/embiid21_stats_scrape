@@ -76,7 +76,7 @@ begin
         stats['THREE_PRCT'] = stats[key]
         stats.delete(key)
       when 'FTM-FTA'
-        stats['FTM_FTA' ]   = stats[key]
+        stats['FTM_FTA']   = stats[key]
         stats.delete(key)
       when 'FT%'
         stats['FT_PRCT']    = stats[key]
@@ -114,21 +114,21 @@ begin
 
       # WORKFLOW 4b: boolean remains TRUE/proceed to upload
       if validations[:upload_stats] == true
+        stats['secret'] = ARGV[0]
 
         # response = HTTParty.post('http://localhost:2121/site/upload_stats', {
-        # response = HTTParty.post('http://embiid21.herokuapp.com/site/upload_stats', {
-        #     :body => stats.to_json,
-        #     :headers => { 'Content-Type' => 'application/json' },
-        #     :body => { :secret => ARGV[0] }
-        # })
+        response = HTTParty.post('http://embiid21.herokuapp.com/site/upload_stats', {
+            :body => stats.to_json,
+            :headers => { 'Content-Type' => 'application/json' },
+        })
 
         # TODO: error response (non 200 code) from Rails Heroku app
-        # log.info "UPLOAD_STATS RESPONSE: " + response.inspect
-        # log.info "RESPONSE STATUS CODE: " + response.code.inspect
-        # log.info output.new_line
+        log.info "UPLOAD_STATS RESPONSE: " + response.inspect
+        log.info "RESPONSE STATUS CODE: " + response.code.inspect
+        log.info output.new_line
 
         # WORKFLOW 4c: upload successful, job is done
-        # if response.code == 200 then validations[:upload_stats] = false end
+        if response.code == 200 then validations[:upload_stats] = false end
         validations[:upload_stats] = false
 
   		  log.info "VALIDATIONS after WORKFLOW 4c: " + validations.inspect
