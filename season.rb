@@ -5,44 +5,51 @@ require 'json'
 
 seasons_stats = HTTParty.get('http://www.espn.com/nba/player/stats/_/id/3059318/joel-embiid')
 
-columns = Nokogiri::HTML(seasons_stats).css('.tablehead tr:nth-child(2) td')
-average = Nokogiri::HTML(seasons_stats).css('.tablehead tr:nth-child(4) td')
+columns = Nokogiri::HTML(seasons_stats).css('.tablehead tr:nth-child(2) td').first(20)
+average = Nokogiri::HTML(seasons_stats).css('.tablehead tr:nth-child(4) td').first(20)
+
+# puts average.inspect
+# puts
 
 stats = {}
 columns.each_with_index do |value, index|
+  # puts value.inspect
   stats[value.text] = average[index].children.text
 end
-      
-puts "SEASON AVERAGES"
-stats.keys.each_with_index do |key, index|
-  puts key.inspect + " => " + stats[key].inspect
 
-  # converting scrape categories to ActiveRecord/Ruby friendly names
-  case key
-  when 'SEASON'
-    stats['YEAR']       = stats[key]
-    stats.delete(key)
-  when 'MINS'
-    stats['MIN']        = stats[key]
-    stats.delete(key)
-  when 'FGM-A'
-    stats['FGM_FGA']    = stats[key]
-    stats.delete(key)
-  when 'FG%'
-    stats['FG_PRCT']    = stats[key]
-    stats.delete(key)
-  when '3PM-A'
-    stats['THREE_M_A']  = stats[key]
-    stats.delete(key)
-  when '3P%'
-    stats['THREE_PRCT'] = stats[key]
-    stats.delete(key)
-  when 'FTM-A'
-    stats['FTM_FTA']   = stats[key]
-    stats.delete(key)
-  when 'FT%'
-    stats['FT_PRCT']    = stats[key]
-    stats.delete(key)
+# puts "SEASON AVERAGES"
+stats.keys.each_with_index do |key, index|
+
+  if index <= 19
+    # puts key.inspect + " => " + stats[key].inspect
+
+    # converting scrape categories to ActiveRecord/Ruby friendly names
+    case key
+    when 'SEASON'
+      stats['YEAR']       = stats[key]
+      stats.delete(key)
+    when 'MINS'
+      stats['MIN']        = stats[key]
+      stats.delete(key)
+    when 'FGM-A'
+      stats['FGM_FGA']    = stats[key]
+      stats.delete(key)
+    when 'FG%'
+      stats['FG_PRCT']    = stats[key]
+      stats.delete(key)
+    when '3PM-A'
+      stats['THREE_M_A']  = stats[key]
+      stats.delete(key)
+    when '3P%'
+      stats['THREE_PRCT'] = stats[key]
+      stats.delete(key)
+    when 'FTM-A'
+      stats['FTM_FTA']   = stats[key]
+      stats.delete(key)
+    when 'FT%'
+      stats['FT_PRCT']    = stats[key]
+      stats.delete(key)
+    end
   end
 end
 puts
